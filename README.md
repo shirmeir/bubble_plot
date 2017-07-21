@@ -23,15 +23,15 @@ log would apply log on the counts which will make the differences between the la
 
 Example of usage:
 
-import pandas as pd
-from sklearn.datasets import load_boston
-data=load_boston()
-df = pd.DataFrame(columns=data['feature_names'], data=data['data'])
-df['target'] = data['target']
-bubble_plot(df,x = 'RM', y = 'target', normalization_by_all=False, log=False)
+import pandas as pd                             
+from sklearn.datasets import load_boston                            
+data=load_boston()                            
+df = pd.DataFrame(columns=data['feature_names'], data=data['data'])                            
+df['target'] = data['target']                            
+bubble_plot(df,x = 'RM', y = 'target', normalization_by_all=False, log=False)                            
 
-
-dependencies - pandas, numpy, matplotlib
+                                          
+dependencies - pandas, numpy, matplotlib                                          
 
 
 Please let me know if you have any questions. My email is meir.shir86@gmail.com.
