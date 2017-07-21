@@ -14,6 +14,21 @@ def get_point(x, digits=2):
 def bubble_plot(df, x, y, ordered_x_values=None, ordered_y_values=None, bins_x=10,
                 bins_y=10, fontsize=16, figsize=(15,10), maximal_bubble_size=5000,
                 normalization_by_all = False, log=False):
+    """
+    :param df: dataframe
+    :param x:  name of first numerical/categorical field (string) (for x-axis)
+    :param y: name of second numerical/categorical field (string) (for y-axis)
+    :param ordered_x_values: the values we would like to map from x categorical variable 
+    according to the order we would like to present them
+    :param ordered_y_values: the values we would like to map from the y categorical variable 
+    according to the order we would like to present them
+    :param bins_x: the bins for x values if x is numberic
+    :param bins_y: the bins for y values if y is numberic
+    :param normalization_by_all: True - shows joint distribution p(x,y), False - shows conditional distribution p(y|x)
+    :param maximal_bubble_size: if the bubbles are too big or too small this is the parameter you should change!
+    :param log: whether to apply log on the count (influence the size of the bubbles)
+    :return: nice bubble plot :)
+    """
     plt.figure(figsize=figsize)
     x_is_numeric = df[x].dtype in (float, int)
     y_is_numeric = df[y].dtype in (float, int)
