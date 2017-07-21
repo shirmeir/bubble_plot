@@ -28,7 +28,7 @@ from sklearn.datasets import load_boston
 data=load_boston()                            
 df = pd.DataFrame(columns=data['feature_names'], data=data['data'])                            
 df['target'] = data['target']                            
-bubble_plot(df,x = 'RM', y = 'target', normalization_by_all=False, log=False)                            
+bubble_plot(df,x = 'RM', y = 'target')                            
 
                                           
 dependencies - pandas, numpy, matplotlib                                          
