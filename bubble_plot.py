@@ -46,4 +46,3 @@ def bubble_plot(df, x, y, ordered_x_values=None, ordered_y_values=None, bins_x=1
                 c=count_table_long['value'], cmap='cool')
     plt.xticks(xticks, xticklabels,fontsize=fontsize)
     plt.yticks(yticks, yticklabels,fontsize=fontsize)
-Contact GitHub API Training Shop Blog About
