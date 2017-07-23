@@ -25,8 +25,7 @@ For numerical features the values will be presented in buckets (ten equally spac
 
 For categorical features the features will be presented according to their categories. If you would like a specific order for the categories presentation please supply a list of the values by order using the `ordered_x_values` / `ordered_y_values` parameters.
 
-You can plot a numerical features vs. another numerical feature or a categorical feature vs another categorical features.
-Normalization by all means joint distribution p(x,y), if it is false we see the conditional distribution of y vs. x p(y/x).
+You can plot a numerical feature vs. another numerical feature or vs. a categorical feature or a categorical feature vs another categorical feature or numerical feature. All options are possible.
 
 Setting the `log` parameter to `True` would apply the natural log function - element wise - on the counts which will make the differences between the largest bubble to the smallest bubble much smaller, so if you have large differences between the frequencies of different values you might want to use that.
 
