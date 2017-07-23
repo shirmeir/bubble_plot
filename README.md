@@ -21,7 +21,7 @@ bubble_plot(df, x, y, ordered_x_values=None, ordered_y_values=None, bins_x=10, b
             figsize=(15,10), maximal_bubble_size=5000, normalization_by_all = False, log=False)
 ```
 
-For numerical features the values will be presented in buckets (tern equally spaced bins will be used as default, you can provide the specific bins / bins number through the `bin_x` and `bins_y` parameters).
+For numerical features the values will be presented in buckets (equally spaced bins will be used as default, you can provide the specific bins / bins number through the `bin_x` and `bins_y` parameters).
 
 For categorical features the features will be presented according to their categories. If you would like a specific order for the categories presentation please supply a list of the values by order using the `ordered_x_values` / `ordered_y_values` parameters.
 
