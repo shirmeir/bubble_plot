@@ -30,6 +30,8 @@ df = pd.DataFrame(columns=data['feature_names'], data=data['data'])
 df['target'] = data['target']                            
 bubble_plot(df,x = 'RM', y = 'target')                            
 
+The resulting bubble plot will look like this:
+![](https://github.com/shirmeir/bubble_plot/blob/master/bubble_plot.png)
                                           
 dependencies - pandas, numpy, matplotlib                                          
 
