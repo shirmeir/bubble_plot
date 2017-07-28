@@ -29,7 +29,7 @@ You can plot a numerical feature vs. another numerical feature or vs. a categori
 
 Setting the `log` parameter to `True` would apply the natural log function - element wise - on the counts which will make the differences between the largest bubble to the smallest bubble much smaller, so if you have large differences between the frequencies of different values you might want to use that.
 
-You can set the z_boolean to name of categorical field with two categories / boolean field, the color of the bucket would be proportional to the ratio ( (boolean_z==value_1).sum()/(boolean_z==value_1).sum() + (boolean_z==value_2).sum()) of the z values for this bucket. 
+Setting the `z_boolean` parameter to a name of categorical field with two categories / boolean field would make the color of the bucket  be proportional to the ratio ( (boolean_z==value_1).sum()/(boolean_z==value_1).sum() + (boolean_z==value_2).sum()) of the z values for this bucket. 
 
 ## <a name="usage"></a>Usage Example
 
