@@ -82,7 +82,7 @@ def plot_with_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, maximal
     z_boolean_values = count_table_long[z_boolean].unique()
     ratio = pd.DataFrame({'ratio':count_table_long.set_index([x,y,z_boolean]).unstack()['value'][z_boolean_values[1]] / (
     count_table_long.set_index([x,y,z_boolean]).unstack()['value'].sum(axis=1) )})
-    count_table_long = count_table_long.set_index(['age','hours-per-week'])[['value']].merge(ratio, left_index=True, right_index=True).reset_index()
+    count_table_long = count_table_long.set_index([x, y])[['value']].merge(ratio, left_index=True, right_index=True).reset_index()
     size_factor = maximal_bubble_size/count_table_long['value'].max()
     x_values_dict = {x:i for i, x in enumerate(ordered_x_values)} \
         if not x_is_numeric else {xx:get_point(xx) for xx in ordered_x_values}
