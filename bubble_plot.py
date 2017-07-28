@@ -39,16 +39,19 @@ def bubble_plot(df, x, y, z_boolean=None, ordered_x_values=None, ordered_y_value
     ordered_x_values = count_table.index.values if ordered_x_values is None else ordered_x_values
     ordered_y_values = count_table.columns if ordered_y_values is None else ordered_y_values
     if z_boolean is not None:
-        plot_with_z(df, x, y, z_boolean, bins_x, bins_y, x_is_numeric, y_is_numeric, maximal_bubble_size)
+        count_table_long, xticks, yticks, xticklabels, yticklabels = plot_with_z(df, x, y, z_boolean, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, maximal_bubble_size)
     else:
-        plot_without_z(df, x, y, bins_x, bins_y, x_is_numeric, y_is_numeric)
+        count_table_long, xticks, yticks, xticklabels, yticklabels = plot_without_z(df, x, y, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, )
     plt.xticks(xticks, xticklabels,fontsize=fontsize)
     plt.yticks(yticks, yticklabels,fontsize=fontsize)
     plt.xlabel(x, fontsize=fontsize)
     plt.ylabel(y, fontsize=fontsize)
-    plt.title("{} vs {} ".format(y,x),fontsize=fontsize+4);
+    if z_boolean is None:
+        plt.title("{} vs {} ".format(y,x),fontsize=fontsize+4);
+    else:
+        plt.title("{} vs {} and {}".format(y,x, z_boolean),fontsize=fontsize+4);
 
-def plot_without_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric):
+def plot_without_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, ):
     if normalization_by_all:
         count_table /= count_table.sum().sum()
     else:
@@ -63,17 +66,18 @@ def plot_without_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric):
         if not x_is_numeric else {xx:get_point(xx) for xx in ordered_x_values}
     y_values_dict = {x:i for i, x in enumerate(ordered_y_values)} \
         if not y_is_numeric else {xx: get_point(xx) for xx in ordered_y_values}
-    count_table_long[x] = count_table_long[x].map(x_values_dict)
-    count_table_long[y] = count_table_long[y].map(y_values_dict)
     xticks = np.arange(count_table.shape[0]) if not x_is_numeric else [get_point(xx) for xx in ordered_x_values]
     yticks = np.arange(count_table.shape[1]) if not y_is_numeric else [get_point(xx) for xx in ordered_y_values]
     xticklabels = ordered_x_values if not x_is_numeric else [get_point(xx) for xx in ordered_x_values]
     yticklabels = ordered_y_values if not y_is_numeric else [get_point(xx) for xx in ordered_y_values]
+    count_table_long[x] = count_table_long[x].map(x_values_dict)
+    count_table_long[y] = count_table_long[y].map(y_values_dict) 
     plt.scatter(count_table_long[x], count_table_long[y], s=size_factor*count_table_long['value'],
                 c=count_table_long['value'], cmap='cool')
-
+ 
+    return count_table_long, xticks, yticks, xticklabels, yticklabels
     
-def plot_with_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, maximal_bubble_size=5000):
+def plot_with_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, maximal_bubble_size=5000):
     count_table = pd.concat([pd.cut(df[x], bins=bins_x) if x_is_numeric else df[x],
                          pd.cut(df[y], bins=bins_y) if y_is_numeric else df[y], df[z_boolean]], axis=1)
     count_table = count_table.groupby([x,z_boolean])[y].value_counts().unstack().fillna(0)
@@ -82,15 +86,19 @@ def plot_with_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, maximal
     z_boolean_values = count_table_long[z_boolean].unique()
     ratio = pd.DataFrame({'ratio':count_table_long.set_index([x,y,z_boolean]).unstack()['value'][z_boolean_values[1]] / (
     count_table_long.set_index([x,y,z_boolean]).unstack()['value'].sum(axis=1) )})
-    count_table_long = count_table_long.set_index([x, y])[['value']].merge(ratio, left_index=True, right_index=True).reset_index()
+    count_table_long = count_table_long.set_index([x, y ])[['value']].merge(ratio, left_index=True, right_index=True).reset_index()
     size_factor = maximal_bubble_size/count_table_long['value'].max()
     x_values_dict = {x:i for i, x in enumerate(ordered_x_values)} \
         if not x_is_numeric else {xx:get_point(xx) for xx in ordered_x_values}
     y_values_dict = {x:i for i, x in enumerate(ordered_y_values)} \
         if not y_is_numeric else {xx: get_point(xx) for xx in ordered_y_values}
+    xticks = np.arange(len(ordered_x_values)) if not x_is_numeric else [get_point(xx) for xx in ordered_x_values]
+    yticks = np.arange(len(ordered_y_values)) if not y_is_numeric else [get_point(xx) for xx in ordered_y_values]
+    xticklabels = ordered_x_values if not x_is_numeric else [get_point(xx) for xx in ordered_x_values]
+    yticklabels = ordered_y_values if not y_is_numeric else [get_point(xx) for xx in ordered_y_values]
     count_table_long[x] = count_table_long[x].map(x_values_dict)
     count_table_long[y] = count_table_long[y].map(y_values_dict)
     plt.scatter(count_table_long[x], count_table_long[y], s=size_factor*count_table_long['value'],
                 c=count_table_long['ratio'], 
                 cmap='cool')
-    
+    return count_table_long, xticks, yticks, xticklabels, yticklabels
