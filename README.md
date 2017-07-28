@@ -53,6 +53,8 @@ The resulting bubble plot will look like this:
 
 
 ## <a name="contact"></a>Contact
+More usage examples and explanations can be found at:
+https://medium.com/@DataLady/exploring-the-census-income-dataset-using-bubble-plot-cfa1b366313b
 
 Please let me know if you have any questions. My email is meir.shir86@gmail.com.
 
