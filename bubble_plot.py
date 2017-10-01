@@ -1,3 +1,4 @@
+
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -39,9 +40,10 @@ def bubble_plot(df, x, y, z_boolean=None, ordered_x_values=None, ordered_y_value
     ordered_x_values = count_table.index.values if ordered_x_values is None else ordered_x_values
     ordered_y_values = count_table.columns if ordered_y_values is None else ordered_y_values
     if z_boolean is not None:
-        count_table_long, xticks, yticks, xticklabels, yticklabels = plot_with_z(df, x, y, z_boolean, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, maximal_bubble_size)
+        count_table_long, xticks, yticks, xticklabels, yticklabels = plot_with_z(df, x, y, z_boolean, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, maximal_bubble_size, normalization_by_all)
     else:
-        count_table_long, xticks, yticks, xticklabels, yticklabels = plot_without_z(df, x, y, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, )
+        count_table_long, xticks, yticks, xticklabels, yticklabels = plot_without_z(df, x, y, z_boolean, count_table, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, 
+                                                                                    normalization_by_all, log=log, maximal_bubble_size=maximal_bubble_size )
     plt.xticks(xticks, xticklabels,fontsize=fontsize)
     plt.yticks(yticks, yticklabels,fontsize=fontsize)
     plt.xlabel(x, fontsize=fontsize)
@@ -51,7 +53,7 @@ def bubble_plot(df, x, y, z_boolean=None, ordered_x_values=None, ordered_y_value
     else:
         plt.title("{} vs {} and {}".format(y,x, z_boolean),fontsize=fontsize+4);
 
-def plot_without_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, ):
+def plot_without_z(df, x, y, z, count_table, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, normalization_by_all=False, log=False, maximal_bubble_size=5000, ):
     if normalization_by_all:
         count_table /= count_table.sum().sum()
     else:
@@ -77,7 +79,7 @@ def plot_without_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, orde
  
     return count_table_long, xticks, yticks, xticklabels, yticklabels
     
-def plot_with_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, maximal_bubble_size=5000):
+def plot_with_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, maximal_bubble_size=5000, normalization_by_all=False):
     count_table = pd.concat([pd.cut(df[x], bins=bins_x) if x_is_numeric else df[x],
                          pd.cut(df[y], bins=bins_y) if y_is_numeric else df[y], df[z_boolean]], axis=1)
     count_table = count_table.groupby([x,z_boolean])[y].value_counts().unstack().fillna(0)
