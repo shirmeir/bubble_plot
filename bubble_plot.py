@@ -1,3 +1,4 @@
+
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -103,6 +104,6 @@ def plot_with_z(df, x, y, z_boolean, bins_x, bins_y, x_is_numeric, y_is_numeric,
     count_table_long[x] = count_table_long[x].map(x_values_dict)
     count_table_long[y] = count_table_long[y].map(y_values_dict)
     plt.scatter(count_table_long[x], count_table_long[y], s=size_factor*count_table_long['value'],
-                c=count_table_long['ratio'], 
+                c=count_table_long['ratio'],  alpha=0.5,
                 cmap='cool')
     return count_table_long, xticks, yticks, xticklabels, yticklabels
