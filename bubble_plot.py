@@ -79,7 +79,7 @@ def plot_without_z(df, x, y, z, count_table, bins_x, bins_y, x_is_numeric, y_is_
  
     return count_table_long, xticks, yticks, xticklabels, yticklabels
     
-def plot_with_z(df, x, y, z, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, maximal_bubble_size=5000, normalization_by_all=False):
+def plot_with_z(df, x, y, z_boolean, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values, ordered_y_values, maximal_bubble_size=5000, normalization_by_all=False):
     count_table = pd.concat([pd.cut(df[x], bins=bins_x) if x_is_numeric else df[x],
                          pd.cut(df[y], bins=bins_y) if y_is_numeric else df[y], df[z_boolean]], axis=1)
     count_table = count_table.groupby([x,z_boolean])[y].value_counts().unstack().fillna(0)
