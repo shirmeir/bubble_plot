@@ -36,7 +36,11 @@ def bubble_plot(df, x, y, z_boolean=None, ordered_x_values=None, ordered_y_value
     y_is_numeric = df[y].dtype in (float, int) and ordered_y_values is None 
     count_table = pd.concat([pd.cut(df[x], bins=bins_x) if x_is_numeric else df[x],
                              pd.cut(df[y], bins=bins_y) if y_is_numeric else df[y]], axis=1)
-    count_table = count_table.groupby(x)[y].value_counts().unstack().fillna(0)
+    try:
+        count_table = count_table.groupby(x)[y].value_counts().unstack().fillna(0)
+    except:
+        count_table[x] = count_table[x].astype(str)
+        count_table = count_table.groupby(x)[y].value_counts().unstack().fillna(0)
     ordered_x_values = count_table.index.values if ordered_x_values is None else ordered_x_values
     ordered_y_values = count_table.columns if ordered_y_values is None else ordered_y_values
     if z_boolean is not None:
