@@ -54,7 +54,7 @@ def bubble_plot(df, x, y, z_boolean=None, ordered_x_values=None, ordered_y_value
 
     count_table[x] = count_table[x].astype(str)
     count_table = count_table.groupby(x)[y].value_counts().unstack().fillna(0)
-
+    count_table = count_table.rename({x:str(x) for x in count_table.columns},axis=1)
     ordered_x_values = count_table.index.values if ordered_x_values is None else ordered_x_values
     ordered_y_values = count_table.columns if ordered_y_values is None else ordered_y_values
     if z_boolean is not None:
@@ -116,6 +116,8 @@ def plot_without_z(df, x, y, z, count_table, bins_x, bins_y, x_is_numeric, y_is_
         count_table = np.log(count_table)
         maximal_bubble_size /= 2
     size_factor = maximal_bubble_size / count_table.max().max()
+    count_table = count_table.rename({x:str(x) for x in count_table.columns},axis=1)
+
     count_table_long = pd.melt(count_table.reset_index(), id_vars=x)
     ordered_x_values = [str(x) for x in ordered_x_values]
     x_values_dict = {x: i for i, x in enumerate(ordered_x_values)} if not x_is_numeric else {xx: get_point(xx) for xx in
