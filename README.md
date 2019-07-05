@@ -3,11 +3,18 @@ Hi everyone!
 
 I love data visualizations! And if you love them too, I think you will find this bubble plot very nice and useful.
 
+- [How to install](#how_to_install)
 - [Motivation & Usage](#motivation)
 - [Usage Example](#usage)
 - [Dependencies](#dependencies)
 - [Contact](#contact)
 
+## <a name="how_to_install"></a>How to install
+
+Very simple - just write in your command line:
+```python
+pip install bubble_plot
+```
 
 ## <a name="motivation"></a>Motivation & Usage
 
