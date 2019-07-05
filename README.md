@@ -41,7 +41,8 @@ Setting the `z_boolean` parameter to a name of categorical field with two catego
 ## <a name="usage"></a>Usage Example
 
 ```python
-import pandas as pd                             
+import pandas as pd  
+from bubble_plot.bubble_plot import bubble_plot
 from sklearn.datasets import load_boston                            
 data = load_boston()                            
 df = pd.DataFrame(columns=data['feature_names'], data=data['data'])                            
