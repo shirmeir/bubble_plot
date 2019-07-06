@@ -69,6 +69,7 @@ bubble_plot(df, x='age', y='hours-per-week', z_boolean='target')
 
 The resulting bubble plot will look like this:
 ![](https://github.com/shirmeir/bubble_plot/blob/master/3d_plotv.png)
+
 P(x,y), x: age, y: working hours, color — proportional to the rate of high income people within each bucket
 
 In this bubble plot, we see  the joint distribution of the hours-per-week vs. the age (p(x,y)), but here the color is proportional to the rate of high income people — (#>50K/((#>50K)+(#≤50K)) - within all the people in this bucket . By supplying the z_boolean variable, we added additional dimension to the plot using the color of the bubble.
