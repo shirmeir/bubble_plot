@@ -170,8 +170,8 @@ def plot_with_z(df, x, y, z_boolean, bins_x, bins_y, x_is_numeric, y_is_numeric,
     yticks = np.arange(len(ordered_y_values)) if not y_is_numeric else [get_point(xx) for xx in ordered_y_values]
     xticklabels = ordered_x_values if not x_is_numeric else [get_point(xx) for xx in ordered_x_values]
     yticklabels = ordered_y_values if not y_is_numeric else [get_point(xx) for xx in ordered_y_values]
-    count_table_long[x] = count_table_long[x].map(x_values_dict)
-    count_table_long[y] = count_table_long[y].map(y_values_dict)
+    count_table_long[x] = count_table_long[x].astype(str).map(x_values_dict)
+    count_table_long[y] = count_table_long[y].astype(str).map(y_values_dict)
     plt.scatter(count_table_long[x], count_table_long[y], s=size_factor * count_table_long['value'],
                 c=count_table_long['ratio'], alpha=0.5,
                 cmap='cool')
