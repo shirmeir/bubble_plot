@@ -6,6 +6,7 @@ I love data visualizations! And if you love them too, I think you will find this
 - [How to install](#how_to_install)
 - [Motivation & Usage](#motivation)
 - [Usage Example](#usage)
+- [Usage Example 2](#usage2)
 - [Dependencies](#dependencies)
 - [Contact](#contact)
 
@@ -52,7 +53,27 @@ bubble_plot(df, x='RM', y='target')
 
 The resulting bubble plot will look like this:
 ![](https://github.com/shirmeir/bubble_plot/blob/master/bubble_plot.png)
-   
+
+## <a name="usage2 "></a>Usage Example 2
+Census income dataset - plot the age vs. hours per week vs. the income level.
+How is that even possible? Can we visualize three dimensions of information in a two dimensional plot?
+
+```python
+import pandas as pd
+import seaborn as sns
+from bubble_plot.bubble_plot import bubble_plot
+sns.set_style("darkgrid")
+df = pd.read_csv("adult.csv")
+bubble_plot(df, x='age', y='hours-per-week', z_boolean='target')
+```                        
+
+The resulting bubble plot will look like this:
+![](https://github.com/shirmeir/bubble_plot/blob/master/3d_plotv.png)
+P(x,y), x: age, y: working hours, color — proportional to the rate of high income people within each bucket
+
+In this bubble plot, we see  the joint distribution of the hours-per-week vs. the age (p(x,y)), but here the color is proportional to the rate of high income people — (#>50K/((#>50K)+(#≤50K)) - within all the people in this bucket . By supplying the z_boolean variable, we added additional dimension to the plot using the color of the bubble.
+
+This plot shows us clearly that the higher income is much more common within people of age higher than 30 which work more than 40 hours a week.
    
 ## <a name="dependencies"></a>Dependencies
   * pandas
