@@ -44,15 +44,17 @@ Setting the `z_boolean` parameter to a name of categorical field with two catego
 ```python
 import pandas as pd  
 from bubble_plot.bubble_plot import bubble_plot
-from sklearn.datasets import load_boston                            
+from sklearn.datasets import load_boston
+import seaborn as sns
+sns.set_style("darkgrid")
 data = load_boston()                            
 df = pd.DataFrame(columns=data['feature_names'], data=data['data'])                            
 df['target'] = data['target']                            
-bubble_plot(df, x='RM', y='target')    
+bubble_plot(df, x='RM', y='target')
 ```                        
 
 The resulting bubble plot will look like this:
-![](https://github.com/shirmeir/bubble_plot/blob/master/bubble_plot.png)
+![](https://github.com/shirmeir/bubble_plot/blob/master/boston.png)
 
 ## <a name="usage2 "></a>Usage Example 2
 Census income dataset - plot the age vs. hours per week vs. the income level.
