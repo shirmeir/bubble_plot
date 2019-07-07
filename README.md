@@ -76,6 +76,11 @@ P(x,y), x: age, y: working hours, color — proportional to the rate of high
 
 In this bubble plot, we see  the joint distribution of the hours-per-week vs. the age (p(x,y)), but here the color is proportional to the rate of high income people — (#>50K/((#>50K)+(#≤50K)) - within all the people in this bucket . By supplying the z_boolean variable, we added additional dimension to the plot using the color of the bubble.
 
+The pinker the color, the higher the ratio for the given boolean feature/target Z. See colormap in the image.
+![](https://github.com/shirmeir/bubble_plot/blob/master/cool.png)
+
+Cool colormap — Pink would stand for the higher ratios in our case, cyan would stand for the lower ratios
+
 This plot shows us clearly that the higher income is much more common within people of age higher than 30 which work more than 40 hours a week.
    
 ## <a name="dependencies"></a>Dependencies
