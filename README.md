@@ -35,6 +35,8 @@ For categorical features the features will be presented according to their categ
 
 You can plot a numerical feature vs. another numerical feature or vs. a categorical feature or a categorical feature vs another categorical feature or numerical feature. All options are possible.
 
+Setting the parameter normalization_by_all to False defines that we would like to plot P(y/x), meaning, plot the distribution of y given x. Each column in this plot is an independent (1D) histogram of the values of the y given x. Setting the parameter normalization_by_all to True would plot the joint distribution of x and y, P(x,y), this is in fact a 2D histogram with bubbles. 
+
 Setting the `log` parameter to `True` would apply the natural log function - element wise - on the counts which will make the differences between the largest bubble to the smallest bubble much smaller, so if you have large differences between the frequencies of different values you might want to use that.
 
 Setting the `z_boolean` parameter to a name of categorical field with two categories / boolean field would make the color of the bucket  be proportional to the ratio ( (boolean_z==value_1).sum()/(boolean_z==value_1).sum() + (boolean_z==value_2).sum()) of the z values for this bucket. 
