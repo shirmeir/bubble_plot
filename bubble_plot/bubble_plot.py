@@ -55,8 +55,8 @@ def bubble_plot(df, x, y, z_boolean=None, ordered_x_values=None, ordered_y_value
     count_table[x] = count_table[x].astype(str)
     count_table = count_table.groupby(x)[y].value_counts().unstack().fillna(0)
     count_table = count_table.rename({x:str(x) for x in count_table.columns},axis=1)
-    ordered_x_values = count_table.index.values if ordered_x_values is None else ordered_x_values
-    ordered_y_values = count_table.columns if ordered_y_values is None else ordered_y_values
+    ordered_x_values = sorted(count_table.index.values) if ordered_x_values is None else ordered_x_values
+    ordered_y_values = sorted(count_table.columns) if ordered_y_values is None else ordered_y_values
     if z_boolean is not None:
         count_table_long, xticks, yticks, xticklabels, yticklabels = plot_with_z(df, x, y, z_boolean, bins_x, bins_y,
                                                                                  x_is_numeric, y_is_numeric,
