@@ -7,6 +7,7 @@ I love data visualizations! And if you love them too, I think you will find this
 - [Motivation & Usage](#motivation)
 - [Usage Example](#usage)
 - [Usage Example 2](#usage2)
+- [Utils](#utils)
 - [Dependencies](#dependencies)
 - [Contact](#contact)
 
@@ -84,11 +85,23 @@ The pinker the color, the higher the ratio for the given boolean feature/target 
 Cool colormap — Pink would stand for the higher ratios in our case, cyan would stand for the lower ratios
 
 This plot shows us clearly that the higher income is much more common within people of age higher than 30 which work more than 40 hours a week.
-   
+
+## <a name="Utils "></a>Utils
+
+Some additional utils for modeling and data exploration were added to this package.
+Examples of how to use them can be found here:
+https://github.com/shirmeir/notebooks/blob/master/predicting_income_from_census_income_data.ipynb
+
+
 ## <a name="dependencies"></a>Dependencies
+for bubble_plot:
   * pandas
   * numpy
-  * matplotlib                                   
+  * matplotlib      
+
+for utils:
+  * sklearn
+  * seaborn
 
 
 ## <a name="contact"></a>Contact
