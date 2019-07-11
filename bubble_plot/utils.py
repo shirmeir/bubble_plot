@@ -5,6 +5,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler, PolynomialFeatures, StandardScaler
 from sklearn.pipeline import Pipeline, FeatureUnion, make_pipeline
 import numpy as np
+import pandas as pd
 
 
 def get_most_correlated_variables(corr, num_pairs=10):
