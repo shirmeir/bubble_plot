@@ -88,7 +88,12 @@ This plot shows us clearly that the higher income is much more common within peo
 
 ## <a name="Utils "></a>Utils
 
-Some additional utils for modeling and data exploration were added to this package.
+Some additional utils for modeling and data exploration were added to this package, like:
+  * get_most_correlated_variables
+  * plot_correlation_matrix
+  * describe_categorical_values
+  * remove_infrequent_values
+
 Examples of how to use them can be found here:
 https://github.com/shirmeir/notebooks/blob/master/predicting_income_from_census_income_data.ipynb
 
