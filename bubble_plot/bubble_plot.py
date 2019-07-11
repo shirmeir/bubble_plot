@@ -81,28 +81,6 @@ def bubble_plot(df, x, y, z_boolean=None, ordered_x_values=None, ordered_y_value
         plt.title("{} vs {} and {} (in colors)".format(y, x, z_boolean), fontsize=fontsize + 4);
 
 
-def describe_categorical_values(df, non_interesting_columns=[], num_categories=5):
-    """
-    Returns:
-         (chart):  the relative frequency of the top num_categories in each column
-    By Shir Meir Lador
-    """
-
-    values_df = pd.DataFrame()
-    for i, column in enumerate(df.columns):
-        if column in non_interesting_columns:
-            continue
-        top_values0 = ["{}: {}%".format(x,int(round(100*y/len(df))))
-                       for x, y in zip(df[column].value_counts(dropna=False).head(num_categories).index,
-                                       df[column].value_counts(dropna=False).head(num_categories).values)]
-        if len(top_values0) < num_categories:
-            top_values = [None]*num_categories
-            top_values[:len(top_values0)] = top_values0
-        else:
-            top_values = top_values0
-        values_df[column] = top_values
-    return values_df.transpose()
-
 def plot_without_z(df, x, y, z, count_table, bins_x, bins_y, x_is_numeric, y_is_numeric, ordered_x_values,
                    ordered_y_values, normalization_by_all=False, log=False, maximal_bubble_size=4000):
     if normalization_by_all:
